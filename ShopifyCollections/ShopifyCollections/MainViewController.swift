@@ -3,7 +3,7 @@
 //  Created by Shashwat Singh
 //  Copyright © 2019 Shashwat Singh. All rights reserved.
 //
-vi 
+
 import UIKit
 
 class MainViewController: UITableViewController {
