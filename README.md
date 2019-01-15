@@ -8,4 +8,4 @@
 
 ### ScreenShots
 
-![Screenshot](https://raw.githubusercontent.com/shashanoid/ShopifyCollections/master/Screenshots/Banner.png)
+![Screenshot](https://raw.githubusercontent.com/shashanoid/ShopifyiOSChallenge/master/Screenshots/Banner.png)
