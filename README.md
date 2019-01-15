@@ -1,4 +1,4 @@
-# Shopify Collections Challenge
+# Shopify iOS Challenge
 
 ### To run the project
 
