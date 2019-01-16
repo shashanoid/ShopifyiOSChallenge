@@ -15,6 +15,7 @@ class ProductDescriptionPage: UICollectionViewCell {
             productDescription.text = product?.description
             vendorTitle.text = product?.vendor
             variantTypes.text = product?.variants
+            inventoryCount.text = product?.inventoryCount
 
             let productImageURL = product?.productImageURL
             guard let imageURL = URL(string: productImageURL!) else {return}
@@ -104,6 +105,23 @@ class ProductDescriptionPage: UICollectionViewCell {
         buyButton.translatesAutoresizingMaskIntoConstraints = false
         return buyButton
     }()
+    
+    let inventoryLabel : UILabel = {
+        let inventoryCount = UILabel()
+        inventoryCount.text = "Total Available: "
+        inventoryCount.translatesAutoresizingMaskIntoConstraints = false
+        inventoryCount.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+        
+        return inventoryCount
+    }()
+    
+    let inventoryCount: UILabel = {
+        let inventoryCount = UILabel()
+        inventoryCount.translatesAutoresizingMaskIntoConstraints = false
+        inventoryCount.font = UIFont.systemFont(ofSize: 15)
+        
+        return inventoryCount
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -141,12 +159,22 @@ class ProductDescriptionPage: UICollectionViewCell {
         variantTypes.topAnchor.constraint(equalTo: productDescription.bottomAnchor,
                                           constant: 30).isActive = true
         variantTypes.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20).isActive = true
-
         
+        
+        addSubview(inventoryLabel)
+        inventoryLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20).isActive = true
+        inventoryLabel.topAnchor.constraint(equalTo: variantTypes.bottomAnchor, constant: 15).isActive = true
+        inventoryLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -265).isActive = true
+        
+        
+        addSubview(inventoryCount)
+        inventoryCount.leftAnchor.constraint(equalTo: inventoryLabel.rightAnchor, constant: 10).isActive = true
+        inventoryCount.topAnchor.constraint(equalTo: variantTypes.bottomAnchor, constant: 15).isActive = true
+
         addSubview(dividerLine)
         dividerLine.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20).isActive = true
         dividerLine.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20).isActive = true
-        dividerLine.topAnchor.constraint(equalTo: variantTypes.bottomAnchor, constant: 15).isActive = true
+        dividerLine.topAnchor.constraint(equalTo: inventoryLabel.bottomAnchor, constant: 15).isActive = true
         dividerLine.heightAnchor.constraint(equalToConstant: 2).isActive = true
 
         addSubview(buyButton)
