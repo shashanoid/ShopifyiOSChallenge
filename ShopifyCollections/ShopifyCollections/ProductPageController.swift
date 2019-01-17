@@ -6,6 +6,29 @@
 
 import UIKit
 
+// Displays a loading screen
+extension UIViewController {
+    class func displaySpinner(onView : UIView) -> UIView {
+        let spinnerView = UIView.init(frame: onView.bounds)
+        spinnerView.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
+        let animator = UIActivityIndicatorView.init(style: .whiteLarge)
+        animator.startAnimating()
+        animator.center = spinnerView.center
+        
+        DispatchQueue.main.async {
+            spinnerView.addSubview(animator)
+            onView.addSubview(spinnerView)
+        }
+        return spinnerView
+    }
+    
+    class func removeSpinner(spinner :UIView) {
+        DispatchQueue.main.async {
+            spinner.removeFromSuperview()
+        }
+    }
+}
+
 class ProductPageController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
     var collectionUrl: String?
@@ -117,9 +140,11 @@ class ProductPageController: UICollectionViewController, UICollectionViewDelegat
 
     // Fetches Product Data
     func getProductData(productURL: String) {
+        let spinnerView = UIViewController.displaySpinner(onView: self.view)
         guard let productURL = URL(string: productURL) else {return}
 
         URLSession.shared.dataTask(with: productURL) { (data, _, error) in
+            UIViewController.removeSpinner(spinner: spinnerView)
             if let error = error {
                 print("Failed to load the URL: \(productURL)", error)
             }
@@ -142,6 +167,7 @@ class ProductPageController: UICollectionViewController, UICollectionViewDelegat
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
                 }
+                
             }catch let jsonError {
                 print("Failed to parse JSON", jsonError)
             }

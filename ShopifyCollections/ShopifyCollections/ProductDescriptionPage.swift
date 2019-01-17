@@ -94,7 +94,7 @@ class ProductDescriptionPage: UICollectionViewCell {
 
         return dividerLine
     }()
-    
+
     let buyButton: UIButton = {
         let buyButton = UIButton()
         buyButton.backgroundColor = UIColor(red:0.31, green:0.72, blue:0.24, alpha:1.0)
@@ -105,7 +105,7 @@ class ProductDescriptionPage: UICollectionViewCell {
         buyButton.translatesAutoresizingMaskIntoConstraints = false
         return buyButton
     }()
-    
+
     let inventoryLabel : UILabel = {
         let inventoryCount = UILabel()
         inventoryCount.text = "Total Available: "
@@ -114,7 +114,7 @@ class ProductDescriptionPage: UICollectionViewCell {
         
         return inventoryCount
     }()
-    
+
     let inventoryCount: UILabel = {
         let inventoryCount = UILabel()
         inventoryCount.translatesAutoresizingMaskIntoConstraints = false
@@ -159,16 +159,16 @@ class ProductDescriptionPage: UICollectionViewCell {
         variantTypes.topAnchor.constraint(equalTo: productDescription.bottomAnchor,
                                           constant: 30).isActive = true
         variantTypes.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20).isActive = true
-        
-        
+
+
         addSubview(inventoryLabel)
         inventoryLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20).isActive = true
         inventoryLabel.topAnchor.constraint(equalTo: variantTypes.bottomAnchor, constant: 15).isActive = true
         inventoryLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -265).isActive = true
-        
-        
+
         addSubview(inventoryCount)
-        inventoryCount.leftAnchor.constraint(equalTo: inventoryLabel.rightAnchor, constant: 10).isActive = true
+        inventoryCount.leftAnchor.constraint(equalTo: inventoryLabel.rightAnchor,
+                                             constant: 10).isActive = true
         inventoryCount.topAnchor.constraint(equalTo: variantTypes.bottomAnchor, constant: 15).isActive = true
 
         addSubview(dividerLine)
@@ -181,8 +181,6 @@ class ProductDescriptionPage: UICollectionViewCell {
         buyButton.topAnchor.constraint(equalTo: dividerLine.bottomAnchor, constant: 30).isActive = true
         buyButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
         buyButton.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor).isActive = true
-        
-        
 
     }
 

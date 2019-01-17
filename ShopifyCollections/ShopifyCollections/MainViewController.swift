@@ -7,12 +7,10 @@
 import UIKit
 
 class MainViewController: UITableViewController {
-    
-    var DataCacheURL: URL?
+
     var collections: [Collection]?
     var collectionURLs: [String]?
-    
-    let CacheQueue = OperationQueue()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,14 +56,14 @@ class MainViewController: UITableViewController {
         navigationController?.pushViewController(productPage, animated: true)
     }
 
+
     //Fetching Json Data for Collections
     func fetchCollectionData() {
         guard let accessToken = Bundle.main.object(forInfoDictionaryKey: "access_token") else {return}
         guard let collectionsURL = URL(string: """
             https://shopicruit.myshopify.com/admin/custom_collections.json?page=1&access_token=\(accessToken)
             """) else {return}
-        
-        
+
         URLSession.shared.dataTask(with: collectionsURL) { (data, _, error) in
             if let error = error {
                 print("Failed to load the URL: \(collectionsURL)", error)
@@ -73,7 +71,7 @@ class MainViewController: UITableViewController {
 
             guard let data = data else {return}
             let allowedCollections = ["aerodynamic-collection", "durable", "small-collection"]
-            
+
             // Serializing JSON
             do {
                 let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
@@ -102,6 +100,7 @@ class MainViewController: UITableViewController {
 
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
+
                 }
             }catch let jsonError {
                 print("Failed to parse JSON:", jsonError)
@@ -110,3 +109,6 @@ class MainViewController: UITableViewController {
     }
 
 }
+
+
+
